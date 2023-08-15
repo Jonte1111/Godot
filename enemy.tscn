@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://dacoteg7jbgqj"]
+
+[ext_resource type="Texture2D" uid="uid://b6olqktnmlwsa" path="res://sprites/dungeonSprites_ v1.5/demon_.png" id="1_c7qg8"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_wq6c2"]
+[ext_resource type="AudioStream" uid="uid://c4irwyqfqqrtp" path="res://Uuhhh.ogg" id="2_6cau2"]
+[ext_resource type="Script" path="res://RayCast2D.gd" id="4_riok7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0k1is"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1swj6"]
+atlas = ExtResource("1_c7qg8")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hbkq"]
+atlas = ExtResource("1_c7qg8")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8efu1"]
+atlas = ExtResource("1_c7qg8")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp3c5"]
+atlas = ExtResource("1_c7qg8")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b1ap1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1swj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hbkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8efu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp3c5")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 7
+mass = 100.0
+gravity_scale = 0.0
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("1_wq6c2")
+
+[node name="oof" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_6cau2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_0k1is")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b1ap1")
+animation = &"new_animation"
+frame_progress = 0.160863
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+script = ExtResource("4_riok7")
+
+[connection signal="finished" from="oof" to="." method="_on_oof_finished"]

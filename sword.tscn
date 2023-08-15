@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhryotp5eaen0"]
+
+[ext_resource type="Script" path="res://sword.gd" id="1_14jqv"]
+[ext_resource type="Texture2D" uid="uid://c63qdo6jacmrq" path="res://FrostmourneLegion-3389046812.png" id="1_tvawg"]
+[ext_resource type="Script" path="res://pivot.gd" id="2_5k4xx"]
+[ext_resource type="Script" path="res://xd.gd" id="4_r4v6j"]
+[ext_resource type="Script" path="res://swordCollision.gd" id="5_sfk88"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sk0rm"]
+radius = 3.0
+height = 26.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_14jqv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
+script = ExtResource("2_5k4xx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(38, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_sk0rm")
+script = ExtResource("5_sfk88")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+rotation = -1.5708
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_tvawg")
+centered = false
+offset = Vector2(-132.682, 249.429)
+script = ExtResource("4_r4v6j")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

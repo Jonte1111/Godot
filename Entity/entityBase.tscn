@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvbpm4cs72n0"]
+
+[ext_resource type="Script" path="res://Entity/entityBase.gd" id="1_ojc5k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_has2t"]
+
+[node name="EntityBase" type="CharacterBody2D"]
+script = ExtResource("1_ojc5k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_has2t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
